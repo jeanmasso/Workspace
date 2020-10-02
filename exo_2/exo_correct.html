@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax Weather</title>
+</head>
+<body>
+    <form onsubmit="handleSubmit(event)">
+        <input type="text" name="city">
+        <button type="submit">envoyer</button>
+    </form>
+    <div id="weather">
+
+    </div>
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            var key = '1103b82fd1ea0bdb896b2ba12aa84033';
+            var city = event.target.city.value;
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + key + '&units=metric');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    var reponse = JSON.parse(xhr.responseText);
+                    displayWeather(reponse);
+                }
+            };
+            xhr.send();
+        }
+
+        function displayWeather(data) {
+            var name = document.createElement('h1');
+            name.innerText = data.name;
+            var wind = document.createElement('p');
+            wind.innerText = 'Vitesse : ' + data.wind.speed;
+            var temperature = document.createElement('p');
+            temperature.innerText = 'Temperature : ' + data.main.temp;
+
+            var container = document.getElementById('weather');
+            container.innerHTML = '';
+            container.appendChild(name);
+            container.appendChild(wind);
+            container.appendChild(temperature);
+        }
+    </script>
+</body>
+</html>

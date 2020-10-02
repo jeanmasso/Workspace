@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="city">
+    <input type="submit" onclick="envoyerAlert()">
+    <div id="weather"></div>
+    <script>
+        function envoyerAlert(){
+            var x = document.getElementById("city").value
+            var xhr = new XMLHttpRequest();
+              xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=' + x + '&appid=e0a7d8c51136dabaf5486d492788a509');
+              xhr.onreadystatechange = function () {
+                  if (xhr.readyState === 4) {
+                     displayWeather(xhr.responseText);
+                  }
+              };
+              xhr.send();
+        }
+
+        function displayWeather(data) {
+            var name = document.createElement('h1');
+            name.innerText = data.name;
+            var 
+            var container = document.getElementById('weather')
+            container.innerHTML = '';
+            container.appendChild(name);
+        }
+    </script>
+</body>
+
+</html>

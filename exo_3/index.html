@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="handlesubmit(event)">
+        <input type="text" id="keyWords">
+        <button type="submit">Click</button>
+    </form>
+
+    <script>
+
+        function handlesubmit(event) {
+            event.preventDefault();
+            
+            var xhr = new XMLHttpRequest();
+              xhr.open('GET', 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=74a9b070d21072ccac3a7b5f44f09efa&tags=soccer&format=json&nojsoncallback=1');
+              xhr.onreadystatechange = function () {
+                  if (xhr.readyState === 4) {
+                     alert(xhr.responseText);
+                  }
+              };
+              xhr.send();
+        }
+
+        function myFunction(img) {
+            
+        }
+    </script>
+</body>
+</html>
